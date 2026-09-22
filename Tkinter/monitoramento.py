@@ -140,9 +140,7 @@ kpi4 = criar_kpi(
 kpi4.grid(row=1, column=1, padx=(5, 0), pady=5)
 
 
-# -----------------------------
-# INDICADOR DE SAÚDE
-# -----------------------------
+
 
 painel_saude = tk.Frame(
     janela,

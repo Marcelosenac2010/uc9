@@ -149,7 +149,7 @@ def calcular_bonificacao():
     if not nome:
         resultado.config(
             text="ERRO: Informe o nome do executivo/gestor.",
-            fg="#ef4444"
+            fg="#b82121"
         )
         entrada_nome.focus()
         return
