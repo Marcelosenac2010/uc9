@@ -8,15 +8,12 @@ class DashboardExecutivo:
         self.criar_componentes()
 
     def configurar_janela(self):
-        # Título da Janela
         self.root.title("Dashboard Gerencial - Métricas & Desempenho Executivo")
         
-        # Dimensões e Janela Fixa (não redimensionável)
         largura = 600
         altura = 420
         self.root.resizable(False, False)
         
-        # Centralização obrigatória na tela (Center Screen)
         largura_tela = self.root.winfo_screenwidth()
         altura_tela = self.root.winfo_screenheight()
         pos_x = (largura_tela // 2) - (largura // 2)
@@ -24,11 +21,9 @@ class DashboardExecutivo:
         
         self.root.geometry(f"{largura}x{altura}+{pos_x}+{pos_y}")
         
-        # Tema Dark Slate corporativo (#0f172a)
         self.root.configure(bg="#0f172a")
 
     def criar_componentes(self):
-        # 1. Cabeçalho Estilizado
         frame_cabecalho = tk.Frame(self.root, bg="#1e293b", height=60)
         frame_cabecalho.pack(fill="x", padx=10, pady=10)
         frame_cabecalho.pack_propagate(False)
@@ -42,17 +37,14 @@ class DashboardExecutivo:
         )
         lbl_titulo.pack(expand=True)
 
-        # 2. Área Principal com Cartões de Métricas (KPIs)
         frame_kpis = tk.Frame(self.root, bg="#0f172a")
         frame_kpis.pack(fill="both", expand=True, padx=10, pady=5)
 
-        # Configuração de grade 2x2 para os KPIs
         frame_kpis.grid_columnconfigure(0, weight=1)
         frame_kpis.grid_columnconfigure(1, weight=1)
         frame_kpis.grid_rowconfigure(0, weight=1)
         frame_kpis.grid_rowconfigure(1, weight=1)
 
-        # Dados das métricas solicitadas
         kpis = [
             ("Receita Mensal", "R$ 458.900", "#38bdf8", 0, 0),
             ("Custo Operacional", "R$ 182.400", "#f43f5e", 0, 1),
@@ -63,7 +55,6 @@ class DashboardExecutivo:
         for titulo, valor, cor, linha, coluna in kpis:
             self.criar_cartao_kpi(frame_kpis, titulo, valor, cor, linha, coluna)
 
-        # 3. Rodapé Indicativo de Sincronização/Status
         frame_rodape = tk.Frame(self.root, bg="#1e293b", height=35)
         frame_rodape.pack(fill="x", side="bottom", padx=10, pady=10)
         frame_rodape.pack_propagate(False)
@@ -81,7 +72,6 @@ class DashboardExecutivo:
         lbl_rodape.pack(expand=True)
 
     def criar_cartao_kpi(self, parent, titulo, valor, cor_destaque, linha, coluna):
-        # Cartão individual simulando o design corporativo
         card = tk.Frame(parent, bg="#1e293b", bd=1, relief="solid")
         card.grid(row=linha, column=coluna, sticky="nsew", padx=8, pady=8)
 

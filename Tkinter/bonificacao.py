@@ -1,17 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
 
-
-# -----------------------------
-# CONFIGURAÇÃO DA JANELA
-# -----------------------------
-
 janela = tk.Tk()
-
 janela.title("Motor Financeiro - Bonificação Executiva e PLR")
 
-largura = 500
-altura = 430
+largura = 700
+altura = 630
 
 largura_tela = janela.winfo_screenwidth()
 altura_tela = janela.winfo_screenheight()
@@ -27,11 +21,6 @@ campo = "#1e293b"
 
 janela.configure(bg=fundo)
 
-
-# -----------------------------
-# TÍTULO
-# -----------------------------
-
 titulo = tk.Label(
     janela,
     text="MOTOR FINANCEIRO",
@@ -39,9 +28,7 @@ titulo = tk.Label(
     fg="white",
     bg=fundo
 )
-
 titulo.pack(pady=(20, 5))
-
 
 subtitulo = tk.Label(
     janela,
@@ -50,23 +37,14 @@ subtitulo = tk.Label(
     fg="#94a3b8",
     bg=fundo
 )
-
 subtitulo.pack(pady=(0, 15))
-
-
-# -----------------------------
-# FORMULÁRIO
-# -----------------------------
 
 formulario = tk.Frame(
     janela,
     bg=fundo
 )
-
 formulario.pack()
 
-
-# Nome
 label_nome = tk.Label(
     formulario,
     text="Nome do Executivo/Gestor:",
@@ -74,7 +52,6 @@ label_nome = tk.Label(
     fg="white",
     bg=fundo
 )
-
 label_nome.grid(row=0, column=0, sticky="w", pady=7)
 
 entrada_nome = tk.Entry(
@@ -85,11 +62,8 @@ entrada_nome = tk.Entry(
     fg="white",
     insertbackground="white"
 )
-
 entrada_nome.grid(row=0, column=1, pady=7)
 
-
-# Salário
 label_salario = tk.Label(
     formulario,
     text="Salário Base (R$):",
@@ -97,7 +71,6 @@ label_salario = tk.Label(
     fg="white",
     bg=fundo
 )
-
 label_salario.grid(row=1, column=0, sticky="w", pady=7)
 
 entrada_salario = tk.Entry(
@@ -108,11 +81,8 @@ entrada_salario = tk.Entry(
     fg="white",
     insertbackground="white"
 )
-
 entrada_salario.grid(row=1, column=1, pady=7)
 
-
-# Metas
 label_metas = tk.Label(
     formulario,
     text="Atingimento de Metas (%):",
@@ -120,7 +90,6 @@ label_metas = tk.Label(
     fg="white",
     bg=fundo
 )
-
 label_metas.grid(row=2, column=0, sticky="w", pady=7)
 
 entrada_metas = tk.Entry(
@@ -131,34 +100,24 @@ entrada_metas = tk.Entry(
     fg="white",
     insertbackground="white"
 )
-
 entrada_metas.grid(row=2, column=1, pady=7)
 
-
-# -----------------------------
-# FUNÇÃO DE CÁLCULO
-# -----------------------------
-
 def calcular_bonificacao():
-
     nome = entrada_nome.get().strip()
     salario_texto = entrada_salario.get().strip()
     metas_texto = entrada_metas.get().strip()
 
-    # Validação do nome
     if not nome:
         resultado.config(
             text="ERRO: Informe o nome do executivo/gestor.",
-            fg="#b82121"
+            fg="#ef4444"
         )
         entrada_nome.focus()
         return
 
-    # Validação dos números
     try:
         salario = float(salario_texto)
         metas = float(metas_texto)
-
     except ValueError:
         resultado.config(
             text="ERRO: Salário e metas devem ser valores numéricos.",
@@ -166,7 +125,6 @@ def calcular_bonificacao():
         )
         return
 
-    # Validação do salário
     if salario <= 0:
         resultado.config(
             text="ERRO: O salário deve ser maior que zero.",
@@ -175,7 +133,6 @@ def calcular_bonificacao():
         entrada_salario.focus()
         return
 
-    # Validação das metas
     if metas <= 0:
         resultado.config(
             text="ERRO: O percentual de metas deve ser maior que zero.",
@@ -192,39 +149,23 @@ def calcular_bonificacao():
         entrada_metas.focus()
         return
 
-    # -----------------------------
-    # REGRAS DE BONIFICAÇÃO
-    # -----------------------------
-
     if metas < 80:
         percentual_bonus = 0
         categoria = "Sem direito à bonificação"
-
     elif metas <= 99:
         percentual_bonus = 0.50
         categoria = "Bonificação Regular"
-
     elif metas <= 120:
         percentual_bonus = 1.00
         categoria = "Bonificação Integral"
-
     elif metas <= 150:
         percentual_bonus = 1.50
         categoria = "Prêmio de Superação"
-
     else:
         percentual_bonus = 2.00
         categoria = "Bonificação Executiva Máxima"
 
-    # -----------------------------
-    # CÁLCULO
-    # -----------------------------
-
     bonificacao = salario * percentual_bonus
-
-    # -----------------------------
-    # EXIBIÇÃO
-    # -----------------------------
 
     resultado.config(
         text=(
@@ -235,11 +176,6 @@ def calcular_bonificacao():
         fg="#22c55e"
     )
 
-
-# -----------------------------
-# BOTÃO
-# -----------------------------
-
 botao_calcular = tk.Button(
     janela,
     text="CALCULAR BONIFICAÇÃO",
@@ -249,13 +185,7 @@ botao_calcular = tk.Button(
     width=25,
     command=calcular_bonificacao
 )
-
 botao_calcular.pack(pady=20)
-
-
-# -----------------------------
-# RESULTADO
-# -----------------------------
 
 label_resultado = tk.Label(
     janela,
@@ -264,9 +194,7 @@ label_resultado = tk.Label(
     fg="#94a3b8",
     bg=fundo
 )
-
 label_resultado.pack()
-
 
 resultado = tk.Label(
     janela,
@@ -276,14 +204,7 @@ resultado = tk.Label(
     bg=fundo,
     justify="center"
 )
-
 resultado.pack(pady=8)
 
-
-# -----------------------------
-# EXECUÇÃO
-# -----------------------------
-
 entrada_nome.focus()
-
 janela.mainloop()
